@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 18, 2024 at 12:23 AM
+-- Generation Time: Feb 18, 2024 at 12:28 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -36,6 +36,13 @@ CREATE TABLE `articoli` (
   `fk_id_centro` int(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `articoli`
+--
+
+INSERT INTO `articoli` (`id_articolo`, `numero_inventario`, `tipologia`, `categoria`, `stato`, `fk_id_centro`) VALUES
+(1, '000017243', 'hardware', 'console', 'disponibile', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -48,6 +55,13 @@ CREATE TABLE `centri` (
   `città` varchar(32) NOT NULL,
   `indirizzo` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `centri`
+--
+
+INSERT INTO `centri` (`id_centro`, `nome`, `città`, `indirizzo`) VALUES
+(1, 'videoteca1', 'pordenone', 'piazza cavour');
 
 -- --------------------------------------------------------
 
@@ -76,6 +90,13 @@ CREATE TABLE `prestiti` (
   `fk_id_articolo` int(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `prestiti`
+--
+
+INSERT INTO `prestiti` (`id_prestito`, `data_inizio`, `data_fine`, `fk_id_utente`, `fk_id_articolo`) VALUES
+(1, '2024-01-14', '2024-01-28', 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -91,6 +112,13 @@ CREATE TABLE `utenti` (
   `password` varchar(32) NOT NULL,
   `tipologia` set('cliente','operatore','admin') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `utenti`
+--
+
+INSERT INTO `utenti` (`id_utente`, `nome`, `cognome`, `indirizzo`, `email`, `password`, `tipologia`) VALUES
+(1, 'fabio', 'pauletta', 'via interna 7, pordenone', '1@gmail.com', '6e6bc4e49dd477ebc98ef4046c067b5f', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -139,13 +167,13 @@ ALTER TABLE `utenti`
 -- AUTO_INCREMENT for table `articoli`
 --
 ALTER TABLE `articoli`
-  MODIFY `id_articolo` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_articolo` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `centri`
 --
 ALTER TABLE `centri`
-  MODIFY `id_centro` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_centro` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `prenotazioni`
@@ -157,13 +185,13 @@ ALTER TABLE `prenotazioni`
 -- AUTO_INCREMENT for table `prestiti`
 --
 ALTER TABLE `prestiti`
-  MODIFY `id_prestito` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_prestito` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `utenti`
 --
 ALTER TABLE `utenti`
-  MODIFY `id_utente` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_utente` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
