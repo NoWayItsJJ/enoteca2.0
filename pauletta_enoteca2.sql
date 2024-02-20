@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 18, 2024 at 12:28 AM
+-- Generation Time: Feb 20, 2024 at 07:55 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,7 +41,8 @@ CREATE TABLE `articoli` (
 --
 
 INSERT INTO `articoli` (`id_articolo`, `numero_inventario`, `tipologia`, `categoria`, `stato`, `fk_id_centro`) VALUES
-(1, '000017243', 'hardware', 'console', 'disponibile', 1);
+(1, '000017243', 'hardware', 'console', 'disponibile', 1),
+(2, '69420', 'software', 'ebook', 'disponibile', 2);
 
 -- --------------------------------------------------------
 
@@ -52,7 +53,7 @@ INSERT INTO `articoli` (`id_articolo`, `numero_inventario`, `tipologia`, `catego
 CREATE TABLE `centri` (
   `id_centro` int(16) NOT NULL,
   `nome` varchar(32) NOT NULL,
-  `città` varchar(32) NOT NULL,
+  `citta` varchar(32) NOT NULL,
   `indirizzo` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -60,8 +61,9 @@ CREATE TABLE `centri` (
 -- Dumping data for table `centri`
 --
 
-INSERT INTO `centri` (`id_centro`, `nome`, `città`, `indirizzo`) VALUES
-(1, 'videoteca1', 'pordenone', 'piazza cavour');
+INSERT INTO `centri` (`id_centro`, `nome`, `citta`, `indirizzo`) VALUES
+(1, 'videoteca1', 'pordenone', 'piazza cavour'),
+(2, 'casa_dani', 'maniago', 'piazza italia');
 
 -- --------------------------------------------------------
 
@@ -110,15 +112,16 @@ CREATE TABLE `utenti` (
   `indirizzo` varchar(64) NOT NULL,
   `email` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL,
-  `tipologia` set('cliente','operatore','admin') NOT NULL
+  `tipo_utente` set('cliente','operatore','admin') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `utenti`
 --
 
-INSERT INTO `utenti` (`id_utente`, `nome`, `cognome`, `indirizzo`, `email`, `password`, `tipologia`) VALUES
-(1, 'fabio', 'pauletta', 'via interna 7, pordenone', '1@gmail.com', '6e6bc4e49dd477ebc98ef4046c067b5f', 'admin');
+INSERT INTO `utenti` (`id_utente`, `nome`, `cognome`, `indirizzo`, `email`, `password`, `tipo_utente`) VALUES
+(1, 'fabio', 'pauletta', 'via interna 7, pordenone', '1@gmail.com', '6e6bc4e49dd477ebc98ef4046c067b5f', 'admin'),
+(2, 'federica', 'casiraghi', 'via interna 7, pordenone', '2@gmail.com', '6e6bc4e49dd477ebc98ef4046c067b5f', 'cliente');
 
 --
 -- Indexes for dumped tables
@@ -167,13 +170,13 @@ ALTER TABLE `utenti`
 -- AUTO_INCREMENT for table `articoli`
 --
 ALTER TABLE `articoli`
-  MODIFY `id_articolo` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_articolo` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `centri`
 --
 ALTER TABLE `centri`
-  MODIFY `id_centro` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_centro` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `prenotazioni`
@@ -191,7 +194,7 @@ ALTER TABLE `prestiti`
 -- AUTO_INCREMENT for table `utenti`
 --
 ALTER TABLE `utenti`
-  MODIFY `id_utente` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_utente` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -201,21 +204,21 @@ ALTER TABLE `utenti`
 -- Constraints for table `articoli`
 --
 ALTER TABLE `articoli`
-  ADD CONSTRAINT `articoli_ibfk_1` FOREIGN KEY (`fk_id_centro`) REFERENCES `centri` (`id_centro`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `articoli_ibfk_1` FOREIGN KEY (`fk_id_centro`) REFERENCES `centri` (`id_centro`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `prenotazioni`
 --
 ALTER TABLE `prenotazioni`
-  ADD CONSTRAINT `prenotazioni_ibfk_1` FOREIGN KEY (`fk_id_utente`) REFERENCES `utenti` (`id_utente`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `prenotazioni_ibfk_2` FOREIGN KEY (`fk_id_articolo`) REFERENCES `articoli` (`id_articolo`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `prenotazioni_ibfk_1` FOREIGN KEY (`fk_id_utente`) REFERENCES `utenti` (`id_utente`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `prenotazioni_ibfk_2` FOREIGN KEY (`fk_id_articolo`) REFERENCES `articoli` (`id_articolo`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `prestiti`
 --
 ALTER TABLE `prestiti`
-  ADD CONSTRAINT `prestiti_ibfk_1` FOREIGN KEY (`fk_id_utente`) REFERENCES `utenti` (`id_utente`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `prestiti_ibfk_2` FOREIGN KEY (`fk_id_articolo`) REFERENCES `articoli` (`id_articolo`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `prestiti_ibfk_1` FOREIGN KEY (`fk_id_utente`) REFERENCES `utenti` (`id_utente`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `prestiti_ibfk_2` FOREIGN KEY (`fk_id_articolo`) REFERENCES `articoli` (`id_articolo`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
