@@ -1,0 +1,336 @@
+/* styles.css */
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
+	background-color: #f0f0f0;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	padding-top: 20px;
+}
+
+.login-box {
+	background-color: #ffffff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	max-width: 300px;
+	width: 100%;
+	margin-bottom: 20px; /* Aggiunge spazio tra il form e la tabella */
+}
+
+.login-box h2 {
+	margin-bottom: 20px;
+	color: #333333;
+}
+
+.user-box {
+	position: relative;
+	margin-bottom: 25px;
+}
+
+form .select {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 25px;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    outline: none;
+    background: transparent;
+}
+select:invalid{
+	color: gray;
+}
+
+option{
+	color: black;
+}
+
+form input[type="checkbox"] + label {
+    margin-left: 5px;
+    font-size: 14px;
+    color: #333333;
+}
+
+.user-box input {
+	width: 100%;
+	padding: 10px 0;
+	font-size: 16px;
+	color: #333333;
+	margin-bottom: 10px;
+	border: none;
+	border-bottom: 1px solid #cccccc;
+	outline: none;
+	background: transparent;
+}
+
+.user-box label {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10px 0;
+	font-size: 16px;
+	color: #666666;
+	pointer-events: none;
+	transition: 0.5s;
+}
+
+.user-box input:focus ~ label,
+.user-box input:valid ~ label {
+	top: -18px;
+	left: 0;
+	color: #2196f3;
+	font-size: 12px;
+}
+
+.submit {
+	width: 100%;
+	margin: 20px 0;
+	padding: 10px;
+	cursor: pointer;
+	border: none;
+	border-radius: 5px;
+	background: #2196f3;
+	color: #ffffff;
+	font-size: 16px;
+	transition: all 0.3s ease;
+}
+
+.submit:hover {
+	background: #0d8bf2;
+}
+
+/* Aggiunta di stili per la tabella */
+.table-wrapper {
+	margin-top: 30px;
+}
+
+.fl-table {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.fl-table th,
+.fl-table td {
+	padding: 8px;
+	text-align: center;
+	border: 1px solid black;
+}
+
+.fl-table th {
+	background-color: #2196f3;
+	color: #fff;
+	text-align: center;
+}
+
+.fl-table tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.fl-table tr:hover {
+	background-color: #ddd;
+}
+
+/* Stili per le colonne della tabella */
+.colonnaId {
+	width: 10px;
+	text-align: center;
+}
+
+.colonnaNumero{
+	width: 150px;
+	text-align: center;
+}
+
+.colonnaTipo {
+	/* operatore, cliente*/
+	width: 150px;
+	text-align: center;
+}
+
+.colonnaCategoria {
+	width: 150px;
+	text-align: center;
+}
+
+.colonnaStato {
+	width: 150px;
+	text-align: center;
+}
+
+.colonnaNome {
+	width: 150px;
+	text-align: center;
+}
+
+.colonnaCitta {
+	width: 150px;
+	text-align: center;
+}
+
+.colonnaIndirizzo {
+	width: 150px;
+	text-align: center;
+}
+
+.colonnaTasti {
+	width: 175px;
+	align-items: center;
+	text-align: center;
+}
+
+.colonnaPartitaIva {
+	width: 180px;
+	text-align: center;
+}
+
+.colonnaEmail{
+	width: 150px;
+}
+
+.colonnaTasti a.btn {
+	display: inline-block; /* Mostra i pulsanti in linea */
+	margin-right: 5px;
+}
+
+/* Stili per i pulsanti nella tabella */
+.btn {
+	padding: 5px 10px;
+	margin: 2px;
+	text-decoration: none;
+	background-color: #4caf50;
+	color: #fff;
+	border-radius: 3px;
+	transition: background-color 0.3s;
+}
+
+.btn:hover {
+	background-color: #45a049;
+}
+
+/* Stili per il pulsante di logout */
+input[type="button"][name="logout"] {
+	margin-top: 20px;
+	padding: 10px;
+	cursor: pointer;
+	border: none;
+	border-radius: 5px;
+	background: #f44336;
+	color: #ffffff;
+	font-size: 16px;
+	transition: all 0.3s ease;
+	transform: translate(20px, 0);
+}
+
+input[type="button"][name="logout"]:hover {
+	background: #d32f2f;
+}
+
+/* Stili per il pulsante di login */
+input[type="button"][name="login"] {
+	margin-top: 20px;
+	padding: 10px;
+	cursor: pointer;
+	border: none;
+	border-radius: 5px;
+	background: #2196f3;
+	color: #ffffff;
+	font-size: 16px;
+	transition: all 0.3s ease;
+	transform: translate(20px, 0);
+}
+
+input[type="button"][name="login"]:hover {
+	background: #0d8bf2;
+}
+
+/* Stili per il pulsante di add */
+input[type="button"][name="add"] {
+	position: absolute;
+	top: auto;
+	right: 40px;
+	margin-top: 20px;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+	margin-top: 20px;
+	background: #2196f3;
+	color: #ffffff;
+	transform: translate(20px, 0);
+}
+
+input[type="button"][name="add"]:hover {
+	background: #0d8bf2;
+}
+
+/* Stile per il popup */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.popup.show {
+    display: block;
+    opacity: 1;
+}
+
+.overlay.show {
+    display: block;
+    opacity: 1;
+}
+
+.popup-message {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.popup button {
+    padding: 8px 16px;
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.popup button:hover {
+    background-color: #ff5252;
+}
