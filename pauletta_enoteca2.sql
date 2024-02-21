@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2024 at 08:44 PM
+-- Generation Time: Feb 21, 2024 at 07:57 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -30,9 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `articoli` (
   `id_articolo` int(16) NOT NULL,
   `numero_inventario` varchar(32) NOT NULL,
-  `tipologia` set('hardware','software') NOT NULL,
-  `categoria` set('computer','tablet','ebook','console') NOT NULL,
   `stato` set('disponibile','guasto','prenotato','in prestito') NOT NULL,
+  `fk_id_categoria` int(16) DEFAULT NULL,
   `fk_id_centro` int(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -40,9 +39,29 @@ CREATE TABLE `articoli` (
 -- Dumping data for table `articoli`
 --
 
-INSERT INTO `articoli` (`id_articolo`, `numero_inventario`, `tipologia`, `categoria`, `stato`, `fk_id_centro`) VALUES
-(1, '000017243', 'hardware', 'console', 'disponibile', 1),
-(2, '69420', 'software', 'ebook', 'disponibile', 2);
+INSERT INTO `articoli` (`id_articolo`, `numero_inventario`, `stato`, `fk_id_categoria`, `fk_id_centro`) VALUES
+(1, '000017243', 'disponibile', 1, 1),
+(2, '69420', 'disponibile', 2, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categorie`
+--
+
+CREATE TABLE `categorie` (
+  `id_categoria` int(16) NOT NULL,
+  `categoria` varchar(32) NOT NULL,
+  `tipologia` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `categorie`
+--
+
+INSERT INTO `categorie` (`id_categoria`, `categoria`, `tipologia`) VALUES
+(1, 'console', 'hardware'),
+(2, 'ebook', 'software');
 
 -- --------------------------------------------------------
 
@@ -63,7 +82,8 @@ CREATE TABLE `centri` (
 
 INSERT INTO `centri` (`id_centro`, `nome`, `citta`, `indirizzo`) VALUES
 (1, 'videoteca1', 'pordenone', 'piazza cavour'),
-(2, 'casa_dani', 'maniago', 'piazza italia');
+(2, 'casa dani', 'maniago', 'piazza italia'),
+(3, 'itst kennedy', 'pordenone', 'via interna 7');
 
 -- --------------------------------------------------------
 
@@ -132,7 +152,14 @@ INSERT INTO `utenti` (`id_utente`, `nome`, `cognome`, `indirizzo`, `email`, `pas
 --
 ALTER TABLE `articoli`
   ADD PRIMARY KEY (`id_articolo`),
-  ADD KEY `fk_id_centro` (`fk_id_centro`);
+  ADD KEY `fk_id_centro` (`fk_id_centro`),
+  ADD KEY `fk_id_categoria` (`fk_id_categoria`);
+
+--
+-- Indexes for table `categorie`
+--
+ALTER TABLE `categorie`
+  ADD PRIMARY KEY (`id_categoria`);
 
 --
 -- Indexes for table `centri`
@@ -173,10 +200,16 @@ ALTER TABLE `articoli`
   MODIFY `id_articolo` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `categorie`
+--
+ALTER TABLE `categorie`
+  MODIFY `id_categoria` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `centri`
 --
 ALTER TABLE `centri`
-  MODIFY `id_centro` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_centro` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `prenotazioni`
@@ -204,7 +237,8 @@ ALTER TABLE `utenti`
 -- Constraints for table `articoli`
 --
 ALTER TABLE `articoli`
-  ADD CONSTRAINT `articoli_ibfk_1` FOREIGN KEY (`fk_id_centro`) REFERENCES `centri` (`id_centro`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `articoli_ibfk_1` FOREIGN KEY (`fk_id_centro`) REFERENCES `centri` (`id_centro`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `articoli_ibfk_2` FOREIGN KEY (`fk_id_categoria`) REFERENCES `categorie` (`id_categoria`);
 
 --
 -- Constraints for table `prenotazioni`
