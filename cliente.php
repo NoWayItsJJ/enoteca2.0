@@ -38,7 +38,9 @@ $id = $_SESSION['id_utente'];
                     $conn = new mysqli($servername, $username, $password, $dbname);
                     $selectSql = "SELECT id_articolo, numero_inventario, tipologia, categoria, stato, nome, citta, indirizzo
                                 FROM articoli a JOIN centri c 
-                                ON a.fk_id_centro = c.id_centro";
+                                ON a.fk_id_centro = c.id_centro
+                                JOIN categorie cat 
+                                ON a.fk_id_categoria = cat.id_categoria";
                     $result = $conn->query($selectSql);
                     while($row = $result->fetch_array(MYSQLI_ASSOC))
                     {

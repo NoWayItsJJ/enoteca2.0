@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 switch($row["tipo_utente"])
                 {
                     case "cliente":
-                        header("Location: cliente.php");
+                        header("Location: visualizza.php");
                         break;
                     case "operatore":
                         header("Location: operatore.php");
