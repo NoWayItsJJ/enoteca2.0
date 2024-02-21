@@ -7,10 +7,15 @@ tabella articoli:
 
 - id_articolo               INT(16)
 - numero inventario         VARCHAR(32)
-- tipologia                 SET(hardware, software)
-- categoria                 SET(computer, tablet, ebook, console)
 - stato                     SET(disponibile, guasto, prenotato, in prestito)
+- fk_id_categoria           INT(16)
 - fk_id_centro              INT(16)
+
+tabella categorie:
+
+- id_categoria              INT(16)
+- nome                      VARCHAR(32)
+- tipologia                 VARCHAR(32)
 
 tabella centri:
 
