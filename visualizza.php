@@ -23,7 +23,7 @@ $id = $_SESSION['id_utente'];
                 <input type="button" class="megaButton" name="visualizzaTutti" value="CENTRI" onclick="location.href='scegliCentro.php'">
             </div>
             <div class="megaButtonContainer">
-                <input type="button" class="megaButton" name="visualizzaTutti" value="TIPOLOGIE" onclick="location.href='cliente.php'">
+                <input type="button" class="megaButton" name="visualizzaTutti" value="TIPOLOGIE" onclick="location.href='scegliTipologia.php'">
             </div>
         </div>
     </body>

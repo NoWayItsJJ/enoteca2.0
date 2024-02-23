@@ -15,6 +15,7 @@ $id = $_SESSION['id_utente'];
 </head>
 <body>
     <input type="button" name="logout" value="Logout" onclick="location.href='logout.php'">
+    <input type="button" name="login" value="Torna alla visualizzazione" onclick="location.href='visualizza.php'">
     <div class="container">
         <div class="table-wrapper">
             <table class="fl-table">
@@ -31,16 +32,49 @@ $id = $_SESSION['id_utente'];
                 </thead>
                 <tbody>
                 <?php
+
+                    if(isset($_GET['idCentro']))
+                    {
+                        $idCentro = $_GET['idCentro'];
+                    }
+
+                    if(isset($_GET['idCategoria']))
+                    {
+                        $idCategoria = $_GET['idCategoria'];
+                    }
+
+                    if(isset($idCentro))
+                    {
+                        $selectSql = "SELECT id_articolo, numero_inventario, tipologia, categoria, stato, nome, citta, indirizzo
+                                FROM articoli a JOIN centri c 
+                                ON a.fk_id_centro = c.id_centro
+                                JOIN categorie cat 
+                                ON a.fk_id_categoria = cat.id_categoria
+                                WHERE fk_id_centro = $idCentro";
+                    }
+                    else if(isset($idCategoria))
+                    {
+                        $selectSql = "SELECT id_articolo, numero_inventario, tipologia, categoria, stato, nome, citta, indirizzo
+                                    FROM articoli a JOIN centri c 
+                                    ON a.fk_id_centro = c.id_centro
+                                    JOIN categorie cat 
+                                    ON a.fk_id_categoria = cat.id_categoria
+                                    WHERE fk_id_categoria = $idCategoria";
+                    }
+                    else
+                    {
+                        $selectSql = "SELECT id_articolo, numero_inventario, tipologia, categoria, stato, nome, citta, indirizzo
+                                    FROM articoli a JOIN centri c 
+                                    ON a.fk_id_centro = c.id_centro
+                                    JOIN categorie cat 
+                                    ON a.fk_id_categoria = cat.id_categoria";
+                    }
+
                     $servername = "localhost";
                     $username = "root"; // Sostituisci con il tuo nome utente del database
                     $password = ""; // Sostituisci con la tua password del database
                     $dbname = "pauletta_enoteca2"; // Sostituisci con il nome del tuo database
                     $conn = new mysqli($servername, $username, $password, $dbname);
-                    $selectSql = "SELECT id_articolo, numero_inventario, tipologia, categoria, stato, nome, citta, indirizzo
-                                FROM articoli a JOIN centri c 
-                                ON a.fk_id_centro = c.id_centro
-                                JOIN categorie cat 
-                                ON a.fk_id_categoria = cat.id_categoria";
                     $result = $conn->query($selectSql);
                     while($row = $result->fetch_array(MYSQLI_ASSOC))
                     {
