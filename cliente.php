@@ -24,10 +24,12 @@ $id = $_SESSION['id_utente'];
                     <th>Numero di inventario</th>
                     <th>Tipologia</th>
                     <th>Categoria</th>
+                    <th>Articolo</th>
                     <th>Stato</th>
                     <th>Centro</th>
                     <th>Città</th>
                     <th>Indirizzo</th>
+                    <th>Prenotalo</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -45,16 +47,17 @@ $id = $_SESSION['id_utente'];
 
                     if(isset($idCentro))
                     {
-                        $selectSql = "SELECT id_articolo, numero_inventario, tipologia, categoria, stato, nome, citta, indirizzo
+                        $selectSql = "SELECT id_articolo, numero_inventario, tipologia, categoria, articolo, stato, nome, citta, indirizzo
                                 FROM articoli a JOIN centri c 
                                 ON a.fk_id_centro = c.id_centro
                                 JOIN categorie cat 
                                 ON a.fk_id_categoria = cat.id_categoria
-                                WHERE fk_id_centro = $idCentro";
+                                WHERE fk_id_centro = $idCentro
+                                ORDER BY tipologia ASC";
                     }
                     else if(isset($idCategoria))
                     {
-                        $selectSql = "SELECT id_articolo, numero_inventario, tipologia, categoria, stato, nome, citta, indirizzo
+                        $selectSql = "SELECT id_articolo, numero_inventario, tipologia, categoria, articolo, stato, nome, citta, indirizzo
                                     FROM articoli a JOIN centri c 
                                     ON a.fk_id_centro = c.id_centro
                                     JOIN categorie cat 
@@ -63,11 +66,12 @@ $id = $_SESSION['id_utente'];
                     }
                     else
                     {
-                        $selectSql = "SELECT id_articolo, numero_inventario, tipologia, categoria, stato, nome, citta, indirizzo
+                        $selectSql = "SELECT id_articolo, numero_inventario, tipologia, categoria, articolo, stato, nome, citta, indirizzo
                                     FROM articoli a JOIN centri c 
                                     ON a.fk_id_centro = c.id_centro
                                     JOIN categorie cat 
-                                    ON a.fk_id_categoria = cat.id_categoria";
+                                    ON a.fk_id_categoria = cat.id_categoria
+                                    ORDER BY tipologia";
                     }
 
                     $servername = "localhost";
@@ -81,6 +85,7 @@ $id = $_SESSION['id_utente'];
                         $n_inventario = $row['numero_inventario'];
                         $tipologia = $row['tipologia'];
                         $categoria = $row['categoria'];
+                        $articolo = $row['articolo'];
                         $stato = $row['stato'];
                         $nome = $row['nome'];
                         $citta = $row['citta'];
@@ -91,6 +96,7 @@ $id = $_SESSION['id_utente'];
                                 <td class="colonnaNumero">'.$n_inventario.'</td>
                                 <td class="colonnaTipo">'.$tipologia.'</td>
                                 <td class="colonnaCategoria">'.$categoria.'</td>
+                                <td class="colonnaArticolo">'.$articolo.'</td>
                                 <td class="colonnaStato">'.$stato.'</td>
                                 <td class="colonnaNome">'.$nome.'</td>
                                 <td class="colonnaCitta">'.$citta.'</td>

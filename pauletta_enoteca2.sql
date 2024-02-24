@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `articoli` (
   `id_articolo` int(16) NOT NULL,
   `numero_inventario` varchar(32) NOT NULL,
+  `articolo` varchar(64) NOT NULL,
   `stato` set('disponibile','guasto','prenotato','in prestito') NOT NULL,
   `fk_id_categoria` int(16) DEFAULT NULL,
   `fk_id_centro` int(16) DEFAULT NULL
@@ -39,9 +40,10 @@ CREATE TABLE `articoli` (
 -- Dumping data for table `articoli`
 --
 
-INSERT INTO `articoli` (`id_articolo`, `numero_inventario`, `stato`, `fk_id_categoria`, `fk_id_centro`) VALUES
-(1, '000017243', 'disponibile', 1, 1),
-(2, '69420', 'disponibile', 2, 2);
+INSERT INTO `articoli` (`id_articolo`, `numero_inventario`, `articolo`, `stato`, `fk_id_categoria`, `fk_id_centro`) VALUES
+(1, '000017243', 'xbox one' ,'disponibile', 1, 1),
+(2, '69420', 'ready player one' ,'disponibile', 2, 2),
+(3, '777', 'xbox 360' ,'disponibile', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -82,7 +84,7 @@ CREATE TABLE `centri` (
 
 INSERT INTO `centri` (`id_centro`, `nome`, `citta`, `indirizzo`) VALUES
 (1, 'videoteca1', 'pordenone', 'piazza cavour'),
-(2, 'casa dani', 'maniago', 'piazza italia'),
+(2, 'videoteca2', 'maniago', 'piazza italia'),
 (3, 'itst kennedy', 'pordenone', 'via interna 7');
 
 -- --------------------------------------------------------
