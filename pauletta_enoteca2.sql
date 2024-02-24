@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2024 at 07:57 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Creato il: Feb 24, 2024 alle 12:31
+-- Versione del server: 10.4.27-MariaDB
+-- Versione PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `articoli`
+-- Struttura della tabella `articoli`
 --
 
 CREATE TABLE `articoli` (
@@ -37,18 +37,20 @@ CREATE TABLE `articoli` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `articoli`
+-- Dump dei dati per la tabella `articoli`
 --
 
 INSERT INTO `articoli` (`id_articolo`, `numero_inventario`, `articolo`, `stato`, `fk_id_categoria`, `fk_id_centro`) VALUES
-(1, '000017243', 'xbox one' ,'disponibile', 1, 1),
-(2, '69420', 'ready player one' ,'disponibile', 2, 2),
-(3, '777', 'xbox 360' ,'disponibile', 1, 3);
+(1, '000017243', 'xbox one', 'disponibile', 1, 1),
+(2, '69420', 'ready player one', 'disponibile', 2, 2),
+(3, '777', 'xbox 360', 'in prestito', 1, 3),
+(4, '12345', 'playstation 5', 'guasto', 1, 3),
+(5, '32834', 'harry potter', 'disponibile', 2, 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categorie`
+-- Struttura della tabella `categorie`
 --
 
 CREATE TABLE `categorie` (
@@ -58,7 +60,7 @@ CREATE TABLE `categorie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `categorie`
+-- Dump dei dati per la tabella `categorie`
 --
 
 INSERT INTO `categorie` (`id_categoria`, `categoria`, `tipologia`) VALUES
@@ -68,7 +70,7 @@ INSERT INTO `categorie` (`id_categoria`, `categoria`, `tipologia`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `centri`
+-- Struttura della tabella `centri`
 --
 
 CREATE TABLE `centri` (
@@ -79,7 +81,7 @@ CREATE TABLE `centri` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `centri`
+-- Dump dei dati per la tabella `centri`
 --
 
 INSERT INTO `centri` (`id_centro`, `nome`, `citta`, `indirizzo`) VALUES
@@ -90,7 +92,7 @@ INSERT INTO `centri` (`id_centro`, `nome`, `citta`, `indirizzo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prenotazioni`
+-- Struttura della tabella `prenotazioni`
 --
 
 CREATE TABLE `prenotazioni` (
@@ -103,7 +105,7 @@ CREATE TABLE `prenotazioni` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prestiti`
+-- Struttura della tabella `prestiti`
 --
 
 CREATE TABLE `prestiti` (
@@ -115,7 +117,7 @@ CREATE TABLE `prestiti` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `prestiti`
+-- Dump dei dati per la tabella `prestiti`
 --
 
 INSERT INTO `prestiti` (`id_prestito`, `data_inizio`, `data_fine`, `fk_id_utente`, `fk_id_articolo`) VALUES
@@ -124,7 +126,7 @@ INSERT INTO `prestiti` (`id_prestito`, `data_inizio`, `data_fine`, `fk_id_utente
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utenti`
+-- Struttura della tabella `utenti`
 --
 
 CREATE TABLE `utenti` (
@@ -138,7 +140,7 @@ CREATE TABLE `utenti` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `utenti`
+-- Dump dei dati per la tabella `utenti`
 --
 
 INSERT INTO `utenti` (`id_utente`, `nome`, `cognome`, `indirizzo`, `email`, `password`, `tipo_utente`) VALUES
@@ -146,11 +148,11 @@ INSERT INTO `utenti` (`id_utente`, `nome`, `cognome`, `indirizzo`, `email`, `pas
 (2, 'federica', 'casiraghi', 'via interna 7, pordenone', '2@gmail.com', '6e6bc4e49dd477ebc98ef4046c067b5f', 'cliente');
 
 --
--- Indexes for dumped tables
+-- Indici per le tabelle scaricate
 --
 
 --
--- Indexes for table `articoli`
+-- Indici per le tabelle `articoli`
 --
 ALTER TABLE `articoli`
   ADD PRIMARY KEY (`id_articolo`),
@@ -158,19 +160,19 @@ ALTER TABLE `articoli`
   ADD KEY `fk_id_categoria` (`fk_id_categoria`);
 
 --
--- Indexes for table `categorie`
+-- Indici per le tabelle `categorie`
 --
 ALTER TABLE `categorie`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
--- Indexes for table `centri`
+-- Indici per le tabelle `centri`
 --
 ALTER TABLE `centri`
   ADD PRIMARY KEY (`id_centro`);
 
 --
--- Indexes for table `prenotazioni`
+-- Indici per le tabelle `prenotazioni`
 --
 ALTER TABLE `prenotazioni`
   ADD PRIMARY KEY (`id_prenotazione`),
@@ -178,7 +180,7 @@ ALTER TABLE `prenotazioni`
   ADD KEY `fk_id_articolo` (`fk_id_articolo`);
 
 --
--- Indexes for table `prestiti`
+-- Indici per le tabelle `prestiti`
 --
 ALTER TABLE `prestiti`
   ADD PRIMARY KEY (`id_prestito`),
@@ -186,71 +188,71 @@ ALTER TABLE `prestiti`
   ADD KEY `fk_id_articolo` (`fk_id_articolo`);
 
 --
--- Indexes for table `utenti`
+-- Indici per le tabelle `utenti`
 --
 ALTER TABLE `utenti`
   ADD PRIMARY KEY (`id_utente`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT per le tabelle scaricate
 --
 
 --
--- AUTO_INCREMENT for table `articoli`
+-- AUTO_INCREMENT per la tabella `articoli`
 --
 ALTER TABLE `articoli`
-  MODIFY `id_articolo` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_articolo` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `categorie`
+-- AUTO_INCREMENT per la tabella `categorie`
 --
 ALTER TABLE `categorie`
   MODIFY `id_categoria` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `centri`
+-- AUTO_INCREMENT per la tabella `centri`
 --
 ALTER TABLE `centri`
   MODIFY `id_centro` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `prenotazioni`
+-- AUTO_INCREMENT per la tabella `prenotazioni`
 --
 ALTER TABLE `prenotazioni`
-  MODIFY `id_prenotazione` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_prenotazione` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- AUTO_INCREMENT for table `prestiti`
+-- AUTO_INCREMENT per la tabella `prestiti`
 --
 ALTER TABLE `prestiti`
   MODIFY `id_prestito` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `utenti`
+-- AUTO_INCREMENT per la tabella `utenti`
 --
 ALTER TABLE `utenti`
   MODIFY `id_utente` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for dumped tables
+-- Limiti per le tabelle scaricate
 --
 
 --
--- Constraints for table `articoli`
+-- Limiti per la tabella `articoli`
 --
 ALTER TABLE `articoli`
   ADD CONSTRAINT `articoli_ibfk_1` FOREIGN KEY (`fk_id_centro`) REFERENCES `centri` (`id_centro`) ON UPDATE CASCADE,
   ADD CONSTRAINT `articoli_ibfk_2` FOREIGN KEY (`fk_id_categoria`) REFERENCES `categorie` (`id_categoria`);
 
 --
--- Constraints for table `prenotazioni`
+-- Limiti per la tabella `prenotazioni`
 --
 ALTER TABLE `prenotazioni`
   ADD CONSTRAINT `prenotazioni_ibfk_1` FOREIGN KEY (`fk_id_utente`) REFERENCES `utenti` (`id_utente`) ON UPDATE CASCADE,
   ADD CONSTRAINT `prenotazioni_ibfk_2` FOREIGN KEY (`fk_id_articolo`) REFERENCES `articoli` (`id_articolo`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `prestiti`
+-- Limiti per la tabella `prestiti`
 --
 ALTER TABLE `prestiti`
   ADD CONSTRAINT `prestiti_ibfk_1` FOREIGN KEY (`fk_id_utente`) REFERENCES `utenti` (`id_utente`) ON UPDATE CASCADE,
