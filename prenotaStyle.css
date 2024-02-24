@@ -1,0 +1,46 @@
+/* styles.css */
+
+.date-selection {
+	background-color: #ffffff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	max-width: 300px;
+	width: 100%;
+	margin: 20px auto; /* Center the form on the page */
+}
+
+.date-selection h1 {
+	margin-bottom: 20px;
+	color: #333333;
+}
+
+.date-selection input[type="date"] {
+	width: 100%;
+	padding: 10px 0;
+	font-size: 16px;
+	color: #333333;
+	margin-bottom: 10px;
+	border: none;
+	border-bottom: 1px solid #cccccc;
+	outline: none;
+	background: transparent;
+}
+
+.date-selection input[type="submit"] {
+	width: 100%;
+	margin: 20px 0;
+	padding: 10px;
+	cursor: pointer;
+	border: none;
+	border-radius: 5px;
+	background: #2196f3;
+	color: #ffffff;
+	font-size: 16px;
+	transition: all 0.3s ease;
+}
+
+.date-selection input[type="submit"]:hover {
+	background: #0d8bf2;
+}
