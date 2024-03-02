@@ -90,6 +90,7 @@ $id = $_SESSION['id_utente'];
                         $nome = $row['nome'];
                         $citta = $row['citta'];
                         $indirizzo = $row['indirizzo'];
+                        $isBooked = ($stato == "prenotato") ? 1 : 0;
 
                         echo
                             '<tr>
@@ -102,7 +103,7 @@ $id = $_SESSION['id_utente'];
                                 <td class="colonnaCitta">'.$citta.'</td>
                                 <td class="colonnaIndirizzo">'.$indirizzo.'</td>
                                 <td class="colonnaTasti">
-                                    <a class="btn" href="prenota.php?id='.$row["id_articolo"].'">Prenota</a>
+                                    <button class="btn" type="button" onclick="location.href=\'prenota.php?id='.$row["id_articolo"].'\'" '. ($isBooked == 1 ? "disabled" : "") . '>Prenota</button>
                                 </td>
                             </tr>';
                     }

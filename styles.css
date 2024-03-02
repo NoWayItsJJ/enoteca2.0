@@ -203,13 +203,8 @@ form input[type="checkbox"] + label {
 	width: 150px;
 }
 
-.colonnaTasti a.btn {
-	display: inline-block; /* Mostra i pulsanti in linea */
-	margin-right: 5px;
-}
-
 /* Stili per i pulsanti nella tabella */
-.btn {
+button.btn {
 	padding: 5px 10px;
 	margin: 2px;
 	text-decoration: none;
@@ -221,6 +216,10 @@ form input[type="checkbox"] + label {
 
 .btn:hover {
 	background-color: #45a049;
+}
+
+button.btn:disabled {
+	background-color: #f44336;
 }
 
 /* Stili per il pulsante di logout */
