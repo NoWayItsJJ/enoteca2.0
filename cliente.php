@@ -14,8 +14,15 @@ $id = $_SESSION['id_utente'];
     <link rel="stylesheet" href="styles.css" type="text/css">
 </head>
 <body>
-    <input type="button" name="logout" value="Logout" onclick="location.href='logout.php'">
-    <input type="button" name="login" value="Torna alla visualizzazione" onclick="location.href='visualizza.php'">
+    <div class="button-container">
+        <div class="top-left-container">
+            <input type="button" name="logout" value="Logout" onclick="location.href='logout.php'">
+            <input type="button" name="login" value="Torna alla visualizzazione" onclick="location.href='visualizza.php'">
+        </div>
+        <div class="top-right-container">
+            <input type="button" name="bookings" value="Le mie prenotazioni" onclick="location.href='visualizzaPrenotazioni.php?id= <?php echo $id?> '">
+        </div>
+    </div>
     <div class="container">
         <div class="table-wrapper">
             <table class="fl-table">

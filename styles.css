@@ -15,6 +15,27 @@ body {
 	padding-top: 20px;
 }
 
+.button-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.top-right-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: right;
+	width: 50%;
+}
+
+.top-left-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	width: 50%;
+}
+
 .login-box {
 	background-color: #ffffff;
 	padding: 20px;
@@ -188,14 +209,14 @@ form input[type="checkbox"] + label {
 	text-align: center;
 }
 
-.colonnaTasti {
-	width: 175px;
-	align-items: center;
+.colonnaData {
+	width: 150px;
 	text-align: center;
 }
 
-.colonnaPartitaIva {
-	width: 180px;
+.colonnaTasti {
+	width: 175px;
+	align-items: center;
 	text-align: center;
 }
 
@@ -219,12 +240,13 @@ button.btn {
 }
 
 button.btn:disabled {
-	background-color: #f44336;
+	background-color: #8b8887;
 }
 
 /* Stili per il pulsante di logout */
 input[type="button"][name="logout"] {
 	margin-top: 20px;
+	margin-right: 10px;
 	padding: 10px;
 	cursor: pointer;
 	border: none;
@@ -243,6 +265,7 @@ input[type="button"][name="logout"]:hover {
 /* Stili per il pulsante di login */
 input[type="button"][name="login"] {
 	margin-top: 20px;
+	margin-right: 10px;
 	padding: 10px;
 	cursor: pointer;
 	border: none;
@@ -301,5 +324,23 @@ input[type="button"][name="add"]:hover {
 }
 
 .megaButton:hover {
+	background: #0d8bf2;
+}
+
+/* Stili per il pulsante di login */
+input[type="button"][name="bookings"] {
+	margin-top: 20px;
+	padding: 10px;
+	cursor: pointer;
+	border: none;
+	border-radius: 5px;
+	background: #2196f3;
+	color: #ffffff;
+	font-size: 16px;
+	transition: all 0.3s ease;
+	transform: translate(-20px, 0);
+}
+
+input[type="button"][name="login"]:hover {
 	background: #0d8bf2;
 }
