@@ -78,7 +78,7 @@ while($row = $result->fetch_array(MYSQLI_ASSOC)) {
                             $citta = $row['citta'];
                             $indirizzo = $row['indirizzo'];
                             $data_inizio = $row['data_inizio'];
-                            $data_fine = $row['data_fine'];
+                            $data_fine = $row['data_fine']; //chiedere a piazza se data fine può essere null
 
                             echo
                                 '<tr>
