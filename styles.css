@@ -330,6 +330,24 @@ input[type="button"][name="add"]:hover {
 /* Stili per il pulsante di login */
 input[type="button"][name="bookings"] {
 	margin-top: 20px;
+	margin-right: 10px;
+	padding: 10px;
+	cursor: pointer;
+	border: none;
+	border-radius: 5px;
+	background: #2196f3;
+	color: #ffffff;
+	font-size: 16px;
+	transition: all 0.3s ease;
+	transform: translate(-20px, 0);
+}
+
+input[type="button"][name="login"]:hover {
+	background: #0d8bf2;
+}
+
+input[type="button"][name="loans"] {
+	margin-top: 20px;
 	padding: 10px;
 	cursor: pointer;
 	border: none;

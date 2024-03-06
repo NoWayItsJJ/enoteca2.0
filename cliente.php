@@ -21,6 +21,7 @@ $id = $_SESSION['id_utente'];
         </div>
         <div class="top-right-container">
             <input type="button" name="bookings" value="Le mie prenotazioni" onclick="location.href='visualizzaPrenotazioni.php?id= <?php echo $id?> '">
+            <input type="button" name="loans" value="I miei prestiti" onclick="location.href='visualizzaPrestiti.php?id= <?php echo $id?> '">
         </div>
     </div>
     <div class="container">

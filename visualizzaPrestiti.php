@@ -14,6 +14,11 @@ $id = $_SESSION['id_utente'];
     </head>
     <body>
         <input type="button" name="login" value="Indietro" onclick="location.href='cliente.php'">
+        <div style="width: 100%; display: flex;
+                    justify-content: center;
+                    font-size:x-large;">
+            <h1>I miei prestiti</h1>
+        </div>
         <div class="container">
         <div class="table-wrapper">
             <table class="fl-table">
@@ -26,8 +31,8 @@ $id = $_SESSION['id_utente'];
                     <th>Centro</th>
                     <th>Città</th>
                     <th>Indirizzo</th>
-                    <th>Data</th>
-                    <th>Annulla la prenotazione</th>
+                    <th>Data Inizio</th>
+                    <th>Data Fine</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,8 +48,8 @@ $id = $_SESSION['id_utente'];
                         $id = $_GET['id'];
 
                         // Prepare and execute the query
-                        $selectSql = "SELECT id_prenotazione, numero_inventario, tipologia, categoria, articolo, nome, citta, indirizzo, data_inizio FROM prenotazioni
-                                    JOIN articoli ON prenotazioni.fk_id_articolo = articoli.id_articolo
+                        $selectSql = "SELECT numero_inventario, tipologia, categoria, articolo, nome, citta, indirizzo, data_inizio, data_fine FROM prestiti
+                                    JOIN articoli ON prestiti.fk_id_articolo = articoli.id_articolo
                                     JOIN categorie ON articoli.fk_id_categoria = categorie.id_categoria
                                     JOIN centri ON articoli.fk_id_centro = centri.id_centro
                                     WHERE fk_id_utente = $id";
@@ -61,6 +66,7 @@ $id = $_SESSION['id_utente'];
                             $citta = $row['citta'];
                             $indirizzo = $row['indirizzo'];
                             $data_inizio = $row['data_inizio'];
+                            $data_fine = $row['data_fine'];
 
                             echo
                                 '<tr>
@@ -72,9 +78,7 @@ $id = $_SESSION['id_utente'];
                                     <td class="colonnaCitta">'.$citta.'</td>
                                     <td class="colonnaIndirizzo">'.$indirizzo.'</td>
                                     <td class="colonnaData">'.$data_inizio.'</td>
-                                    <td class="colonnaTasti">
-                                        <button class="btn" type="button" onclick="location.href=\'annullaPrenotazione.php?id='.$row["id_prenotazione"].'\'">Annulla</button>
-                                    </td>
+                                    <td class="colonnaData">'.$data_fine.'</td>
                                 </tr>';
                         }
                     ?>
