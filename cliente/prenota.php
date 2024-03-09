@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(!isset($_SESSION['email']) || !isset($_SESSION['password']) || !isset($_SESSION['id_utente']) || !isset($_SESSION['tipo_utente'])) {
-        header("Location: logindenied.php");
+        header("Location: ../logindenied.php");
     }
 
     $idUtente = $_SESSION['id_utente'];
@@ -11,8 +11,8 @@
 <html>
 <head>
     <title>Seleziona una data</title>
-    <link rel="stylesheet" href="styles.css" type="text/css">
-    <link rel="stylesheet" href="prenotaStyle.css" type="text/css">
+    <link rel="stylesheet" href="../style/styles.css" type="text/css">
+    <link rel="stylesheet" href="../style/prenotaStyle.css" type="text/css">
 </head>
 <body>
     <input type="button" name="login" value="Indietro" onclick="location.href='cliente.php'">

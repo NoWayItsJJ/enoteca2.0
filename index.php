@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Login area riservata</title>
-    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="style/styles.css" type="text/css">
 </head>
 <body>
 
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 switch($row["tipo_utente"])
                 {
                     case "cliente":
-                        header("Location: visualizza.php");
+                        header("Location: ./cliente/visualizzaCliente.php");
                         break;
                     case "operatore":
                         header("Location: operatore.php");

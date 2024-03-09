@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['email']) || !isset($_SESSION['password']) || !isset($_SESSION['id_utente']) || !isset($_SESSION['tipo_utente'])) {
-    header("Location: logindenied.php");
+    header("Location: ../logindenied.php");
 }
 
 $id = $_SESSION['id_utente'];
@@ -11,13 +11,13 @@ $id = $_SESSION['id_utente'];
 <html>
 <head>
     <title>Area Cliente</title>
-    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="../style/styles.css" type="text/css">
 </head>
 <body>
     <div class="button-container">
         <div class="top-left-container">
-            <input type="button" name="logout" value="Logout" onclick="location.href='logout.php'">
-            <input type="button" name="login" value="Torna alla visualizzazione" onclick="location.href='visualizza.php'">
+            <input type="button" name="logout" value="Logout" onclick="location.href='../logout.php'">
+            <input type="button" name="login" value="Torna alla visualizzazione" onclick="location.href='visualizzaCliente.php'">
         </div>
         <div class="top-right-container">
             <input type="button" name="bookings" value="Le mie prenotazioni" onclick="location.href='visualizzaPrenotazioni.php?id= <?php echo $id?> '">
@@ -82,7 +82,7 @@ $id = $_SESSION['id_utente'];
                                     ORDER BY tipologia";
                     }
 
-                    require_once 'db.php';
+                    require_once '../db.php';
                     $result = $conn->query($selectSql);
                     while($row = $result->fetch_array(MYSQLI_ASSOC))
                     {

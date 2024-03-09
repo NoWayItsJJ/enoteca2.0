@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['email']) || !isset($_SESSION['password']) || !isset($_SESSION['id_utente']) || !isset($_SESSION['tipo_utente'])) {
-    header("Location: logindenied.php");
+    header("Location: ../logindenied.php");
 }
 
 $id = $_SESSION['id_utente'];
@@ -10,10 +10,10 @@ $id = $_SESSION['id_utente'];
 <html>
     <head>
         <title>Visualizza</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="../style/styles.css">
     </head>
     <body>
-        <input type="button" name="logout" value="Logout" onclick="location.href='logout.php'">
+        <input type="button" name="logout" value="Logout" onclick="location.href='../logout.php'">
         <div class="container">
             <h1>Scegli quali articoli visualizzare:</h1>
             <div class="megaButtonContainer">

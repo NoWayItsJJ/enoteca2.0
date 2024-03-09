@@ -1,12 +1,12 @@
 <?php 
     session_start();
     if(!isset($_SESSION['email']) || !isset($_SESSION['password']) || !isset($_SESSION['id_utente']) || !isset($_SESSION['tipo_utente'])) {
-        header("Location: logindenied.php");
+        header("Location: ../logindenied.php");
     }
 
     $idPrenotazione = $_GET['id'];
 
-    require_once "db.php";
+    require_once "../db.php";
 
     $editSql = "UPDATE articoli SET stato = 'disponibile' WHERE id_articolo = (SELECT fk_id_articolo FROM prenotazioni WHERE id_prenotazione = $idPrenotazione)";
     $result = $conn->query($editSql);

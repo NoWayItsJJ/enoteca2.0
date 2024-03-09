@@ -1,12 +1,12 @@
 <?php
 session_start();
 if(!isset($_SESSION['email']) || !isset($_SESSION['password']) || !isset($_SESSION['id_utente']) || !isset($_SESSION['tipo_utente'])) {
-    header("Location: logindenied.php");
+    header("Location: ../logindenied.php");
 }
 
 $id = $_SESSION['id_utente'];
 
-require_once "db.php";
+require_once "../db.php";
 
 $nomeSql = "SELECT nome FROM utenti WHERE id_utente = $id";
 $result = $conn->query($nomeSql);
@@ -18,7 +18,7 @@ while($row = $result->fetch_array(MYSQLI_ASSOC)) {
 <html>
     <head>
         <title>Le mie prenotazioni</title>
-        <link rel="stylesheet" href="styles.css" type="text/css">
+        <link rel="stylesheet" href="../style/styles.css" type="text/css">
     </head>
     <body>
         <input type="button" name="login" value="Indietro" onclick="location.href='cliente.php'">
