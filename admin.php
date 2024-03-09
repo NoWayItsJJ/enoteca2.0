@@ -5,6 +5,8 @@ if(!isset($_SESSION['email']) || !isset($_SESSION['password']) || !isset($_SESSI
 }
 
 $id = $_SESSION['id_utente'];
+
+//WORK IN PROGRESS
 ?>
 
 <!DOCTYPE html>
@@ -24,23 +26,43 @@ $id = $_SESSION['id_utente'];
         <div class="table-wrapper">
             <table class="fl-table">
                 <thead>
-                <tr>
-                    <th>Numero di inventario</th>
-                    <th>Tipologia</th>
-                    <th>Categoria</th>
-                    <th>Articolo</th>
-                    <th>Stato</th>
-                    <th>Centro</th>
-                    <th>Città</th>
-                    <th>Indirizzo</th>
-                    <th>Prenotalo</th>
-                </tr>
-                </thead>
-                <tbody>
                 <?php
 
-                    echo $_SESSION['tipo_utente'];
-
+                switch($_GET['choice']) {
+                    case 1:
+                        echo '<tr>
+                            <th>Numero di inventario</th>
+                            <th>Tipologia</th>
+                            <th>Categoria</th>
+                            <th>Articolo</th>
+                            <th>Stato</th>
+                            <th>Centro</th>
+                            <th>Città</th>
+                            <th>Indirizzo</th>
+                            <th>Modifica</th>
+                        </tr>';
+                        $selectSql = "SELECT id_articolo, numero_inventario, tipologia, categoria, articolo, stato, nome, citta, indirizzo
+                                    FROM articoli a JOIN centri c 
+                                    ON a.fk_id_centro = c.id_centro
+                                    JOIN categorie cat 
+                                    ON a.fk_id_categoria = cat.id_categoria
+                                    ORDER BY tipologia";
+                        break;
+                    case 2:
+                        $selectSql = "SELECT * FROM prestiti";
+                        break;
+                    case 3:
+                        $selectSql = "SELECT * FROM prenotazioni";
+                        break;
+                    case 4:
+                        $selectSql = "SELECT * FROM utenti";
+                        break;
+                    default:
+                        header("Location: sceltaAdmin.php");
+                }
+                ?>
+                <tbody>
+                <?php
                     $servername = "localhost";
                     $username = "root"; // Sostituisci con il tuo nome utente del database
                     $password = ""; // Sostituisci con la tua password del database
@@ -82,3 +104,4 @@ $id = $_SESSION['id_utente'];
 </body>
 <?php $conn->close();?>
 </html>
+

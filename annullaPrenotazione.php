@@ -6,11 +6,7 @@
 
     $idPrenotazione = $_GET['id'];
 
-    $servername = "localhost";
-    $username = "root"; // Sostituisci con il tuo nome utente del database
-    $password = ""; // Sostituisci con la tua password del database
-    $dbname = "pauletta_enoteca2"; // Sostituisci con il nome del tuo database
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    require_once "db.php";
 
     $editSql = "UPDATE articoli SET stato = 'disponibile' WHERE id_articolo = (SELECT fk_id_articolo FROM prenotazioni WHERE id_prenotazione = $idPrenotazione)";
     $result = $conn->query($editSql);

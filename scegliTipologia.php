@@ -17,11 +17,7 @@ $id = $_SESSION['id_utente'];
         <div class="container">
             <h1>Scegli la tipologia da visualizzare:</h1>
             <?php 
-                $servername = "localhost";
-                $username = "root"; // Sostituisci con il tuo nome utente del database
-                $password = ""; // Sostituisci con la tua password del database
-                $dbname = "pauletta_enoteca2"; // Sostituisci con il nome del tuo database
-                $conn = new mysqli($servername, $username, $password, $dbname);
+                require_once "db.php";
                 $selectSql = "SELECT DISTINCT * FROM categorie";
                 $result = $conn->query($selectSql);
                 while($row = $result->fetch_array(MYSQLI_ASSOC))

@@ -14,18 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pass = $_POST["pass"];
 
     //Connessione al database
-    $servername = "localhost";
-    $username = "root"; //Sostituisci con il tuo nome utente del database
-    $password = ""; //Sostituisci con la tua password del database
-    $dbname = "pauletta_enoteca2"; //Sostituisci con il nome del tuo database
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Verifica della connessione
-    if ($conn->connect_error)
-    {
-        die("Connessione fallita: " . $conn->connect_error);
-    }
+    require_once "db.php";
 
     if(filter_var($email, FILTER_VALIDATE_EMAIL))
     {

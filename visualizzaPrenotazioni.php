@@ -6,11 +6,7 @@ if(!isset($_SESSION['email']) || !isset($_SESSION['password']) || !isset($_SESSI
 
 $id = $_SESSION['id_utente'];
 
-$servername = "localhost";
-                        $username = "root"; // Sostituisci con il tuo nome utente del database
-                        $password = ""; // Sostituisci con la tua password del database
-                        $dbname = "pauletta_enoteca2"; // Sostituisci con il nome del tuo database
-                        $conn = new mysqli($servername, $username, $password, $dbname);
+require_once "db.php";
 
 $nomeSql = "SELECT nome FROM utenti WHERE id_utente = $id";
 $result = $conn->query($nomeSql);
@@ -49,13 +45,6 @@ while($row = $result->fetch_array(MYSQLI_ASSOC)) {
                 </thead>
                 <tbody>
                     <?php
-
-                        $servername = "localhost";
-                        $username = "root"; // Sostituisci con il tuo nome utente del database
-                        $password = ""; // Sostituisci con la tua password del database
-                        $dbname = "pauletta_enoteca2"; // Sostituisci con il nome del tuo database
-                        $conn = new mysqli($servername, $username, $password, $dbname);
-
                         // Get the ID received via POST method
                         $id = $_GET['id'];
 
@@ -67,6 +56,7 @@ while($row = $result->fetch_array(MYSQLI_ASSOC)) {
                                     WHERE fk_id_utente = $id";
 
                         $result = $conn->query($selectSql);
+                        $conn->close();
 
                         while($row = $result->fetch_array(MYSQLI_ASSOC))
                             {

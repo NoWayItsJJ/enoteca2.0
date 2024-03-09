@@ -8,11 +8,7 @@
     $idArticolo = $_POST['id_articolo'];
     $dataPrenotazione = $_POST['selected_date'];
 
-    $servername = "localhost";
-    $username = "root"; // Sostituisci con il tuo nome utente del database
-    $password = ""; // Sostituisci con la tua password del database
-    $dbname = "pauletta_enoteca2"; // Sostituisci con il nome del tuo database
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    require_once "db.php";
 
     $insertSql = "INSERT INTO `prenotazioni` (`id_prenotazione`, `data_inizio`, `fk_id_utente`, `fk_id_articolo`) VALUES (NULL, '$dataPrenotazione', '$idUtente', '$idArticolo')";
     $conn->query($insertSql);

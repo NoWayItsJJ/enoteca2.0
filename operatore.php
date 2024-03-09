@@ -5,6 +5,8 @@ if(!isset($_SESSION['email']) || !isset($_SESSION['password']) || !isset($_SESSI
 }
 
 $id = $_SESSION['id_utente'];
+
+//NOT EDITED YET
 ?>
 
 <!DOCTYPE html>

@@ -82,11 +82,7 @@ $id = $_SESSION['id_utente'];
                                     ORDER BY tipologia";
                     }
 
-                    $servername = "localhost";
-                    $username = "root"; // Sostituisci con il tuo nome utente del database
-                    $password = ""; // Sostituisci con la tua password del database
-                    $dbname = "pauletta_enoteca2"; // Sostituisci con il nome del tuo database
-                    $conn = new mysqli($servername, $username, $password, $dbname);
+                    require_once 'db.php';
                     $result = $conn->query($selectSql);
                     while($row = $result->fetch_array(MYSQLI_ASSOC))
                     {
