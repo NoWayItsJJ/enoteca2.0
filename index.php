@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         header("Location: operatore.php");
                         break;
                     case "admin":
-                        header("Location: admin.php");
+                        header("Location: sceltaAdmin.php");
                         break;
                 }
             }
