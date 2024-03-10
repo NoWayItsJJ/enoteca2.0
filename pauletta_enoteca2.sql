@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2024 at 09:44 PM
+-- Generation Time: Mar 10, 2024 at 10:01 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -43,9 +43,9 @@ CREATE TABLE `articoli` (
 INSERT INTO `articoli` (`id_articolo`, `numero_inventario`, `articolo`, `stato`, `fk_id_categoria`, `fk_id_centro`) VALUES
 (1, '000017243', 'xbox one', 'disponibile', 1, 1),
 (2, '69420', 'ready player one', 'disponibile', 2, 2),
-(3, '777', 'xbox 360', 'in prestito', 1, 3),
 (4, '12345', 'playstation 5', 'guasto', 1, 3),
-(5, '32834', 'harry potter', 'disponibile', 2, 3);
+(5, '32834', 'harry potter', 'disponibile', 2, 3),
+(9, '070', 'xbox 360', 'disponibile', 1, 1);
 
 --
 -- Triggers `articoli`
@@ -79,7 +79,7 @@ CREATE TABLE `articoli_dismessi` (
 --
 
 INSERT INTO `articoli_dismessi` (`id_articolo`, `numero_inventario`, `articolo`, `stato`, `fk_id_categoria`, `fk_id_centro`) VALUES
-(6, '069', 'test', 'guasto', 1, 2);
+(8, '100', 'test guasto', 'guasto', 2, 3);
 
 -- --------------------------------------------------------
 
@@ -245,13 +245,13 @@ ALTER TABLE `utenti`
 -- AUTO_INCREMENT for table `articoli`
 --
 ALTER TABLE `articoli`
-  MODIFY `id_articolo` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_articolo` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `articoli_dismessi`
 --
 ALTER TABLE `articoli_dismessi`
-  MODIFY `id_articolo` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_articolo` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `categorie`
