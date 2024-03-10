@@ -19,6 +19,9 @@ $id = $_SESSION['id_utente'];
             <input type="button" name="logout" value="Logout" onclick="location.href='../logout.php'">
             <input type="button" name="login" value="Torna alla scelta" onclick="location.href='sceltaAdmin.php'">
         </div>
+        <div class="top-right-container">
+            <input type="button" name="loans" value="Articoli dismessi" onclick="location.href='visualizzaArticoliDismessi.php'">
+        </div>
     </div>
     <div class="container">
         <div class="table-wrapper">
