@@ -72,6 +72,7 @@ $id = $_SESSION['id_utente'];
                                     <button class="btn" type="button" onclick="location.href=\'modifica_articolo.php?id='.$row["id_articolo"].'\'">Elimina</button>
                                 </td>
                             </tr>';
+                            //todo: aggiungere la funzione di eliminazione
                     }
                 ?>
                 </tbody>
