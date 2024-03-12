@@ -3,7 +3,7 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recupera i dati dal form
-    $id_articolo = $_POST["id_articolo"];
+    $id_articolo = $_POST["id"];
     $numero_inventario = $_POST["numeroInventario"];
     $articolo = $_POST["articolo"];
     $stato = $_POST["stato"];
@@ -12,13 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     require_once '../db.php';
 
-    //$editSql = "UPDATE ticket SET tipo_ticket='$tipo2', titolo='$titolo2', descrizione='$descrizione2', urgente='$urgente2', risolto='$risolto2' WHERE id=$id";
-
-    echo $id_articolo;
-    echo $numero_inventario;
-    echo $articolo;
-    echo $stato;
-    echo $categoria;
-    echo $centro;
+    $editSql = "UPDATE articoli SET numero_inventario='$numero_inventario', articolo='$articolo', stato='$stato', fk_id_categoria='$categoria', fk_id_centro='$centro' WHERE id_articolo=$id_articolo";
+    $conn->query($editSql);
+    header("Location: visualizzaArticoli.php");
 }
 ?>
