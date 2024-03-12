@@ -3,8 +3,10 @@
 
     require_once '../db.php';
     $id = $_GET['id'];
-    $deleteSql = "DELETE FROM articoli_dismessi WHERE id_articolo = $id";
+    $editSql = "UPDATE articoli SET stato='guasto' WHERE id_articolo = $id";
+    $conn->query($editSql);
+    $deleteSql = "DELETE FROM articoli WHERE id_articolo = $id";
     $conn->query($deleteSql);
-    header('Location: visualizzaArticoliDismessi.php');
+    header('Location: visualizzaArticoli.php');
     exit;
 ?>

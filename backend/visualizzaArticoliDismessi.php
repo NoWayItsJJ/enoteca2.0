@@ -69,10 +69,9 @@ $id = $_SESSION['id_utente'];
                                 <td class="colonnaCitta">'.$citta.'</td>
                                 <td class="colonnaIndirizzo">'.$indirizzo.'</td>
                                 <td class="colonnaTasti">
-                                    <button class="btn" type="button" onclick="location.href=\'modifica_articolo.php?id='.$row["id_articolo"].'\'">Elimina</button>
+                                    <button class="btn" type="button" onclick="location.href=\'elimina_articolo.php?id='.$row["id_articolo"].'\'">Elimina</button>
                                 </td>
-                            </tr>';
-                            //todo: aggiungere la funzione di eliminazione
+                            </tr>'; //pensare di implementare un popup di conferma eliminazione
                     }
                 ?>
                 </tbody>
