@@ -17,6 +17,8 @@ $articoloRow = $articoloResult->fetch_array(MYSQLI_ASSOC);
 $numero_inventario = $articoloRow['numero_inventario'];
 $articolo = $articoloRow['articolo'];
 $stato = $articoloRow['stato'];
+$id_categoria = $articoloRow['fk_id_categoria'];
+$id_centro = $articoloRow['fk_id_centro'];
 ?>
 
 <html>
@@ -34,34 +36,40 @@ $stato = $articoloRow['stato'];
                 
                 <div class="user-box"><input type="text" name="numeroInventario" <?php echo "value=".$articoloRow["numero_inventario"]?> required><label>Numero Inventario</label></div>
                 <div class="user-box"><input type="text" name="articolo" <?php echo "value='". $articoloRow['articolo'] ."'"?> required><label>Articolo</label></div>
-                <div><select class="select" name="stato" required>
+                <div class="user-box">
+                    <select class="select" name="stato" required>
                     <option value="disponibile" <?php if($stato==='disponibile') echo 'selected="selected"';?>>Disponibile</option>
                     <option value="in prestito" <?php if($stato==='in prestito') echo 'selected="selected"';?>>In prestito</option>
                     <option value="prenotato" <?php if($stato==='prenotato') echo 'selected="selected"';?>>Prenotato</option>
-                    <option value="guasto" <?php if($stato==='guasto') echo 'selected="selected"';?>>Guasto</option>></option>
-                </select>
+                    <option value="guasto" <?php if($stato==='guasto') echo 'selected="selected"';?>>Guasto</option>
+                    </select>
                 </div>
-                <div><select class="select" name="categoria" required>
+                <div class="user-box">
+                    <select class="select" name="categoria" required>
                     <?php 
                         require_once '../db.php';
-                        $categoriaSql = "SELECT id_categoria, categoria FROM categorie";
+                        $categoriaSql = "SELECT id_categoria, categoria, tipologia FROM categorie";
                         $categoriaResult = $conn->query($categoriaSql);
                         while($categoriaRow = $categoriaResult->fetch_array(MYSQLI_ASSOC)) {
-                            echo "<script>console.log('".$categoriaRow['id_categoria']."')</script>";
-                            echo "<option value=".$categoriaRow['id_categoria'].">".$categoriaRow['categoria']."</option>";
+                            $selectedCategoria = ($id_categoria == $categoriaRow['id_categoria']) ? 'selected="selected"' : '';
+                            echo "<option value=".$categoriaRow['id_categoria']." ".$selectedCategoria .">".$categoriaRow['tipologia']." - ".$categoriaRow['categoria']."</option>";
                         }
                     ?>
-                </select>
+                    </select>
                 </div>
-                <div><select class="select" name="centro" required>
+                <div class="user-box">
+                    <select class="select" name="centro" required>
                     <?php 
                         require_once '../db.php';
-                        $centroSql = "SELECT id_centro, nome FROM centri";
+                        $centroSql = "SELECT id_centro, nome, citta FROM centri";
                         $centroResult = $conn->query($centroSql);
                         while($centroRow = $centroResult->fetch_array(MYSQLI_ASSOC)) {
-                            echo "<option value=".$centroRow['id_centro'].">".$centroRow['nome']."</option>";
+                            $selectedCentro = ($id_centro == $centroRow['id_centro']) ? 'selected="selected"' : '';
+                            echo "<option value=".$centroRow['id_centro']." ".$selectedCentro .">".$centroRow['nome']. " - " . $centroRow['citta'] . "</option>";
                         }
                     ?>
+                    </select>
+                </div>
                 <div><input type="hidden" name="id" <?php echo "value=".$articoloRow["id_articolo"]?>></div>
                 <input class="submit" type="submit" value="Salva modifiche">
             </form>
