@@ -36,6 +36,7 @@ $id = $_SESSION['id_utente'];
                     <th>Centro</th>
                     <th>Città</th>
                     <th>Indirizzo</th>
+                    <th>Prestito</th>
                     <th>Azioni</th>
                 </tr>
                 </thead>
@@ -60,6 +61,8 @@ $id = $_SESSION['id_utente'];
                         $nome = $row['nome'];
                         $citta = $row['citta'];
                         $indirizzo = $row['indirizzo'];
+                        $isAvailable = ($stato == "disponibile" || $stato == "in prestito") ? 1 : 0;
+                        $isLoaned = ($stato == "in prestito") ? 1 : 0;
 
                         echo
                             '<tr>
@@ -71,6 +74,9 @@ $id = $_SESSION['id_utente'];
                                 <td class="colonnaNome">'.$nome.'</td>
                                 <td class="colonnaCitta">'.$citta.'</td>
                                 <td class="colonnaIndirizzo">'.$indirizzo.'</td>
+                                <td class="colonnaTasti">
+                                <button class="btn" type="button" onclick="location.href=\'prestito_articolo.php?id='.$row["id_articolo"].'&loaned='. $isLoaned .'\'" '. ($isAvailable == 1 ? "" : "disabled") . '>'.($isLoaned == 0 ? "Prestito" : "Restituzione").'</button>
+                                </td>
                                 <td class="colonnaTasti">
                                     <button class="btn" type="button" onclick="location.href=\'modifica_articolo.php?id='.$row["id_articolo"].'\'">Modifica</button>
                                     <button class="btn" type="button" onclick="location.href=\'dismetti_articolo.php?id='.$row["id_articolo"].'\'">Dismetti</button>
