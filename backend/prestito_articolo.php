@@ -14,14 +14,7 @@ if(isset($_GET["loaned"]))
     $loaned = $_GET['loaned'];
 }
 
-switch($loaned) {
-    case 1:
-        //zero ideeeeeeeeee
-        break;
-    case 0:
-        $loaned = 1;
-        break;
-}
+require_once '../db.php';
 
 // Query SQL per selezionare il record corrispondente all'ID
 $articoloSql = "SELECT id_articolo, numero_inventario, articolo, stato, fk_id_categoria, fk_id_centro FROM articoli WHERE id_articolo = $id";
@@ -39,29 +32,29 @@ $id_centro = $articoloRow['fk_id_centro'];
 <head>
     <title>Prestito articolo</title>
     <link rel="stylesheet" href="../style/styles.css" type="text/css">
+    <link rel="stylesheet" href="../style/prenotaStyle.css" type="text/css">
 </head>
 <body>
     <input type="button" name="login" value="Chiudi" onclick="location.href='visualizzaArticoli.php'">
     <div class="container">
-        <div class="login-box">
-            <h2>Prestito articolo:</h2>
-            
-            <form method="post" action="salva_prestito.php">
-                <div class="user-box">
-                    <select class="select" name="cliente" required>
-                    <?php 
-                        require_once '../db.php';
-                        $centroSql = "SELECT id_centro, nome, citta FROM centri";
-                        $centroResult = $conn->query($centroSql);
-                        while($centroRow = $centroResult->fetch_array(MYSQLI_ASSOC)) {
-                            $selectedCentro = ($id_centro == $centroRow['id_centro']) ? 'selected="selected"' : '';
-                            echo "<option value=".$centroRow['id_centro']." ".$selectedCentro .">".$centroRow['nome']. " - " . $centroRow['citta'] . "</option>";
-                        }
+        <div class="date-selection">
+            <h1>Seleziona la data <?php echo ($loaned == 1) ? "di restituzione" : "di prestito" ?></h1>
+            <form method="POST" action="salva_prestito.php">
+                <input type="date" name="selected_date">
+                <select name="loanUser" class="select">
+                    <option value="0">Seleziona l'utente</option>
+                    <?php
+                    $utentiSql = "SELECT id_utente, nome, cognome FROM utenti WHERE tipo_utente = 'Cliente'";
+                    $utentiResult = $conn->query($utentiSql);
+                    while($utentiRow = $utentiResult->fetch_array(MYSQLI_ASSOC))
+                    {
+                        echo "<option value=" . $utentiRow['id_utente'] . ">" . $utentiRow['nome'] . " " . $utentiRow['cognome'] . "</option>";
+                    }
                     ?>
-                    </select>
-                </div>
-                <div><input type="hidden" name="id" <?php echo "value=".$articoloRow["id_articolo"]?>></div>
-                <input class="submit" type="submit" value="Salva modifiche">
+                </select>
+                <input type="hidden" name="id_articolo" <?php echo "value=" . $id ?>>
+                <input type="hidden" name="loaned" <?php echo "value=" . $loaned ?>>
+                <input type="submit" value="Invia">
             </form>
         </div>
     </div>
