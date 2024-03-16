@@ -3,24 +3,35 @@
     if(!isset($_SESSION['email']) || !isset($_SESSION['password']) || !isset($_SESSION['id_utente']) || !isset($_SESSION['tipo_utente'])) {
         header("Location: ../logindenied.php");
     }
-    
+
+    $idUtente = $_POST['loanUser'];
     $idArticolo = $_POST['id_articolo'];
-    $dataPrenotazione = $_POST['selected_date'];
+    $loaned = $_POST['loaned'];
+    $dataPrestito = $_POST['selected_date'];
 
     require_once "../db.php";
 
-    $insertSql = "INSERT INTO `prenotazioni` (`id_prenotazione`, `data_inizio`, `fk_id_utente`, `fk_id_articolo`) VALUES (NULL, '$dataPrenotazione', '$idUtente', '$idArticolo')";
-    $conn->query($insertSql);
-
-    $editSql = "UPDATE articoli SET stato = 'Prenotato' WHERE id_articolo = $idArticolo";
-    $result = $conn->query($editSql);
-
-    if($result)
+    switch($loaned)
     {
-        header("Location: cliente.php");
-    }
-    else
-    {
-        echo "Errore nella prenotazione";
+        case 0:
+            $editSql = "UPDATE articoli SET stato = 'in prestito' WHERE id_articolo = $idArticolo";
+            $conn->query($editSql);
+            $loanSql = "INSERT INTO prestiti (id_prestito, data_inizio, fk_id_utente, fk_id_articolo) VALUES (NULL, '$dataPrestito', '$idUtente', '$idArticolo')";
+            $result0 = $conn->query($loanSql);
+            if($result0)
+            {
+                header("Location: visualizzaArticoli.php");
+            }
+            break;
+        case 1:
+            $editSql2 = "UPDATE articoli SET stato = 'disponibile' WHERE id_articolo = $idArticolo";
+            $conn->query($editSql2);
+            $restituzioneSql = "UPDATE prestiti SET data_fine = '$dataPrestito' WHERE fk_id_articolo = $idArticolo AND data_fine IS NULL";
+            $result1 = $conn->query($restituzioneSql);
+            if($result1)
+            {
+                header("Location: visualizzaArticoli.php");
+            }
+            break;
     }
 ?>

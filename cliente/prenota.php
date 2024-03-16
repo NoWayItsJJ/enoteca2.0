@@ -4,8 +4,16 @@
         header("Location: ../logindenied.php");
     }
 
+    require_once "../db.php";
+
     $idUtente = $_SESSION['id_utente'];
     $idArticolo = $_GET['id'];
+    $checkSql = "SELECT stato FROM articoli WHERE id_articolo = $idArticolo";
+    $checkResult = $conn->query($checkSql);
+    $checkRow = $checkResult->fetch_assoc();
+    if($checkRow['stato'] != "disponibile") {
+        header("Location: ../articoloNonDisponibile.php");
+    }
 ?>
 
 <html>
