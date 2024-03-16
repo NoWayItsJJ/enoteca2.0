@@ -7,7 +7,7 @@
     $idUtente = $_POST['loanUser'];
     $idArticolo = $_POST['id_articolo'];
     $loaned = $_POST['loaned'];
-    $dataPrestito = $_POST['selected_date'];
+    $dataPrestito = $_POST['selected_date']; //trigger per controllare che la data sia futura, se non lo è metterla uguale alla data di inizio
 
     require_once "../db.php";
 
