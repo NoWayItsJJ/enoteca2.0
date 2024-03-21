@@ -199,6 +199,11 @@ form input[type="checkbox"] + label {
 	text-align: center;
 }
 
+.colonnaCognome {
+	width: 150px;
+	text-align: center;
+}
+
 .colonnaCitta {
 	width: 150px;
 	text-align: center;
