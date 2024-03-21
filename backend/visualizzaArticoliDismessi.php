@@ -69,9 +69,9 @@ $id = $_SESSION['id_utente'];
                                 <td class="colonnaCitta">'.$citta.'</td>
                                 <td class="colonnaIndirizzo">'.$indirizzo.'</td>
                                 <td class="colonnaTasti">
-                                    <button class="btn" type="button" onclick="location.href=\'elimina_articolo.php?id='.$row["id_articolo"].'\'">Elimina</button>
+                                    <button class="btn" type="button" onclick="location.href=\'ripristina_articolo.php?id='.$row["id_articolo"].'\'">Ripristina</button>
                                 </td>
-                            </tr>'; //pensare di implementare un popup di conferma eliminazione
+                            </tr>'; //pensare di implementare un popup di conferma riprsitino
                     }
                 ?>
                 </tbody>

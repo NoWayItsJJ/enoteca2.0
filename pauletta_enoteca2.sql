@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2024 at 10:01 PM
+-- Generation Time: Mar 21, 2024 at 09:14 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -45,7 +45,8 @@ INSERT INTO `articoli` (`id_articolo`, `numero_inventario`, `articolo`, `stato`,
 (2, '69420', 'ready player one', 'disponibile', 2, 2),
 (4, '12345', 'playstation 5', 'guasto', 1, 3),
 (5, '32834', 'harry potter', 'disponibile', 2, 3),
-(9, '070', 'xbox 360', 'disponibile', 1, 1);
+(9, '071', 'game of thrones', 'in prestito', 2, 3),
+(11, '123456', 'test restore', 'disponibile', 1, 2);
 
 --
 -- Triggers `articoli`
@@ -80,6 +81,18 @@ CREATE TABLE `articoli_dismessi` (
 
 INSERT INTO `articoli_dismessi` (`id_articolo`, `numero_inventario`, `articolo`, `stato`, `fk_id_categoria`, `fk_id_centro`) VALUES
 (8, '100', 'test guasto', 'guasto', 2, 3);
+
+--
+-- Triggers `articoli_dismessi`
+--
+DELIMITER $$
+CREATE TRIGGER `restore_trigger` BEFORE DELETE ON `articoli_dismessi` FOR EACH ROW BEGIN
+    -- Copy the deleted record to the articoli_dismessi table
+    INSERT INTO articoli (id_articolo, numero_inventario, articolo, stato, fk_id_categoria, fk_id_centro) 
+    VALUES (OLD.id_articolo, OLD.numero_inventario, OLD.articolo, OLD.stato, OLD.fk_id_categoria, OLD.fk_id_centro);
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -155,7 +168,20 @@ CREATE TABLE `prestiti` (
 --
 
 INSERT INTO `prestiti` (`id_prestito`, `data_inizio`, `data_fine`, `fk_id_utente`, `fk_id_articolo`) VALUES
-(1, '2024-01-14', '2024-01-28', 2, 1);
+(1, '2024-01-14', '2024-01-28', 2, 1),
+(3, '2024-03-25', '2024-03-25', 2, 11);
+
+--
+-- Triggers `prestiti`
+--
+DELIMITER $$
+CREATE TRIGGER `check_dates` BEFORE UPDATE ON `prestiti` FOR EACH ROW BEGIN
+   IF NEW.data_fine < NEW.data_inizio THEN
+      SET NEW.data_fine = NEW.data_inizio;
+   END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -245,13 +271,13 @@ ALTER TABLE `utenti`
 -- AUTO_INCREMENT for table `articoli`
 --
 ALTER TABLE `articoli`
-  MODIFY `id_articolo` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_articolo` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `articoli_dismessi`
 --
 ALTER TABLE `articoli_dismessi`
-  MODIFY `id_articolo` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_articolo` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `categorie`
@@ -275,7 +301,7 @@ ALTER TABLE `prenotazioni`
 -- AUTO_INCREMENT for table `prestiti`
 --
 ALTER TABLE `prestiti`
-  MODIFY `id_prestito` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_prestito` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `utenti`
