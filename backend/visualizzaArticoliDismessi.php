@@ -38,7 +38,7 @@ $id = $_SESSION['id_utente'];
                 </thead>
                 <tbody>
                 <?php
-                    $selectSql = "SELECT id_articolo, numero_inventario, tipologia, categoria, articolo, stato, nome, citta, indirizzo
+                    $selectSql = "SELECT id_articolo2, numero_inventario, tipologia, categoria, articolo, stato, nome, citta, indirizzo
                                     FROM articoli_dismessi a JOIN centri c 
                                     ON a.fk_id_centro = c.id_centro
                                     JOIN categorie cat 
@@ -69,7 +69,7 @@ $id = $_SESSION['id_utente'];
                                 <td class="colonnaCitta">'.$citta.'</td>
                                 <td class="colonnaIndirizzo">'.$indirizzo.'</td>
                                 <td class="colonnaTasti">
-                                    <button class="btn" type="button" onclick="location.href=\'ripristina_articolo.php?id='.$row["id_articolo"].'\'">Ripristina</button>
+                                    <button class="btn" type="button" onclick="location.href=\'ripristina_articolo.php?id='.$row["id_articolo2"].'\'">Ripristina</button>
                                 </td>
                             </tr>'; //pensare di implementare un popup di conferma riprsitino
                     }

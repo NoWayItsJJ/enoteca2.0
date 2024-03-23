@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mar 23, 2024 alle 10:49
+-- Creato il: Mar 23, 2024 alle 11:51
 -- Versione del server: 10.4.27-MariaDB
 -- Versione PHP: 8.2.0
 
@@ -45,8 +45,7 @@ INSERT INTO `articoli` (`id_articolo`, `numero_inventario`, `articolo`, `stato`,
 (2, '69420', 'ready player one', 'disponibile', 2, 2),
 (4, '12345', 'playstation 5', 'guasto', 1, 3),
 (5, '32834', 'harry potter', 'disponibile', 2, 3),
-(9, '071', 'game of thrones', 'in prestito', 2, 3),
-(11, '123456', 'test restore', 'guasto', 1, 2);
+(9, '071', 'game of thrones', 'in prestito', 2, 3);
 
 --
 -- Trigger `articoli`
@@ -80,7 +79,8 @@ CREATE TABLE `articoli_dismessi` (
 --
 
 INSERT INTO `articoli_dismessi` (`id_articolo2`, `numero_inventario`, `articolo`, `stato`, `fk_id_categoria`, `fk_id_centro`) VALUES
-(8, '100', 'test guasto', 'guasto', 2, 3);
+(8, '100', 'test guasto', 'guasto', 2, 3),
+(11, '123456', 'test restore', 'guasto', 1, 2);
 
 --
 -- Trigger `articoli_dismessi`
@@ -318,7 +318,7 @@ ALTER TABLE `utenti`
 --
 ALTER TABLE `articoli`
   ADD CONSTRAINT `articoli_ibfk_1` FOREIGN KEY (`fk_id_centro`) REFERENCES `centri` (`id_centro`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `articoli_ibfk_2` FOREIGN KEY (`fk_id_categoria`) REFERENCES `categorie` (`id_categoria`);
+  ADD CONSTRAINT `articoli_ibfk_2` FOREIGN KEY (`fk_id_categoria`) REFERENCES `categorie` (`id_categoria`) ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `articoli_dismessi`
@@ -338,8 +338,7 @@ ALTER TABLE `prenotazioni`
 -- Limiti per la tabella `prestiti`
 --
 ALTER TABLE `prestiti`
-  ADD CONSTRAINT `prestiti_ibfk_1` FOREIGN KEY (`fk_id_utente`) REFERENCES `utenti` (`id_utente`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `prestiti_ibfk_2` FOREIGN KEY (`fk_id_articolo`) REFERENCES `articoli` (`id_articolo`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `prestiti_ibfk_1` FOREIGN KEY (`fk_id_utente`) REFERENCES `utenti` (`id_utente`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

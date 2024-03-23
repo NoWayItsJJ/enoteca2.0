@@ -45,9 +45,9 @@ $id = $_SESSION['id_utente'];
                                 JOIN centri c ON a.fk_id_centro = c.id_centro
                                 JOIN utenti u ON p.fk_id_utente = u.id_utente
                                 UNION
-                                SELECT id_articolo, numero_inventario, articolo, c.nome as centro, citta, c.indirizzo, u.nome as nome, cognome, data_inizio, data_fine
+                                SELECT id_articolo2, numero_inventario, articolo, c.nome as centro, citta, c.indirizzo, u.nome as nome, cognome, data_inizio, data_fine
                                 FROM prestiti p
-                                JOIN articoli_dismessi d ON p.fk_id_articolo = d.id_articolo
+                                JOIN articoli_dismessi d ON p.fk_id_articolo = d.id_articolo2
                                 JOIN centri c ON d.fk_id_centro = c.id_centro
                                 JOIN utenti u ON p.fk_id_utente = u.id_utente";
 
