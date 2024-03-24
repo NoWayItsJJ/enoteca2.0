@@ -25,13 +25,13 @@ $id = $_SESSION['id_utente'];
             <table class="fl-table">
                 <thead>
                 <tr>
-                    <th>Numero di inventario</th>
+                    <th>Nome</th>
+                    <th>Cognome</th>
                     <th>Articolo</th>
+                    <th>Numero di inventario</th>
                     <th>Centro</th>
                     <th>Città</th>
                     <th>Indirizzo</th>
-                    <th>Nome</th>
-                    <th>Cognome</th>
                     <th>Data di inizio</th>
                     <th>Data di fine</th>
                 </tr>
@@ -49,31 +49,32 @@ $id = $_SESSION['id_utente'];
                                 FROM prestiti p
                                 JOIN articoli_dismessi d ON p.fk_id_articolo = d.id_articolo2
                                 JOIN centri c ON d.fk_id_centro = c.id_centro
-                                JOIN utenti u ON p.fk_id_utente = u.id_utente";
+                                JOIN utenti u ON p.fk_id_utente = u.id_utente
+                                ORDER BY data_inizio DESC";
 
                     require_once '../db.php';
                     $result = $conn->query($selectSql);
                     while($row = $result->fetch_array(MYSQLI_ASSOC))
                     {
+                        $nome = $row['nome'];
+                        $cognome = $row['cognome'];
                         $n_inventario = $row['numero_inventario'];
                         $articolo = $row['articolo'];
                         $centro = $row['centro'];
                         $citta = $row['citta'];
                         $indirizzo = $row['indirizzo'];
-                        $nome = $row['nome'];
-                        $cognome = $row['cognome'];
                         $data_inizio = $row['data_inizio'];
-                        $data_fine = $row['data_fine'];
+                        $data_fine = ($row['data_fine']) ? $row['data_fine'] : 'In prestito';
 
                         echo
                             '<tr>
-                                <td class="colonnaNumero">'.$n_inventario.'</td>
+                                <td class="colonnaNome">'.$nome.'</td>
+                                <td class="colonnaCognome">'.$cognome.'</td>
                                 <td class="colonnaArticolo">'.$articolo.'</td>
+                                <td class="colonnaNumero">'.$n_inventario.'</td>
                                 <td class="colonnaNome">'.$centro.'</td>
                                 <td class="colonnaCitta">'.$citta.'</td>
                                 <td class="colonnaIndirizzo">'.$indirizzo.'</td>
-                                <td class="colonnaNome">'.$nome.'</td>
-                                <td class="colonnaCognome">'.$cognome.'</td>
                                 <td class="colonnaData">'.$data_inizio.'</td>
                                 <td class="colonnaData">'.$data_fine.'</td>
                             </tr>';

@@ -78,8 +78,8 @@ $id = $_SESSION['id_utente'];
                                 <button class="btn" type="button" onclick="location.href=\'prestito_articolo.php?id='.$row["id_articolo"].'&loaned='. $isLoaned .'\'" '. ($isAvailable == 1 ? "" : "disabled") . '>'.($isLoaned == 0 ? "Prestito" : "Restituzione").'</button>
                                 </td>
                                 <td class="colonnaTasti">
-                                    <button class="btn" type="button" onclick="location.href=\'modifica_articolo.php?id='.$row["id_articolo"].'\'">Modifica</button>
-                                    <button class="btn" type="button" onclick="location.href=\'dismetti_articolo.php?id='.$row["id_articolo"].'\'">Dismetti</button>
+                                    <button class="btn" type="button" onclick="location.href=\'modifica_articolo.php?id='.$row["id_articolo"].'\'" '. ($isLoaned == 1 ? "disabled" : "") . '>Modifica</button>
+                                    <button class="btn" type="button" onclick="location.href=\'dismetti_articolo.php?id='.$row["id_articolo"].'\'" '. ($isLoaned == 1 ? "disabled" : "") . '>Dismetti</button>
                                 </td>
                             </tr>';
                     }
