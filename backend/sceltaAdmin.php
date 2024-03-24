@@ -1,10 +1,11 @@
 <?php
 session_start();
-if(!isset($_SESSION['email']) || !isset($_SESSION['password']) || !isset($_SESSION['id_utente']) || !isset($_SESSION['tipo_utente']) || $_SESSION['tipo_utente'] != "admin") {
+if(!isset($_SESSION['email']) || !isset($_SESSION['password']) || !isset($_SESSION['id_utente']) || !isset($_SESSION['tipo_utente']) || $_SESSION['tipo_utente'] == "cliente") {
     header("Location: ../logindenied.php");
 }
 
 $id = $_SESSION['id_utente'];
+$tipo = $_SESSION['tipo_utente'];
 ?>
 
 <html>
@@ -25,9 +26,13 @@ $id = $_SESSION['id_utente'];
             <div class="megaButtonContainer">
                 <input type="button" class="megaButton" name="visualizzaTutti" value="PRENOTAZIONI" onclick="location.href='visualizzaPrenotazioni.php'">
             </div>
-            <div class="megaButtonContainer">
-                <input type="button" class="megaButton" name="visualizzaTutti" value="UTENTI" onclick="location.href='visualizzaUtenti.php'">
-            </div>
+            <?php
+                if($tipo == "admin") {
+                    echo '<div class="megaButtonContainer">
+                        <input type="button" class="megaButton" name="visualizzaTutti" value="UTENTI" onclick="location.href=\'visualizzaUtenti.php\'">
+                    </div>';
+                }
+            ?>
         </div>
     </body>
 </html>

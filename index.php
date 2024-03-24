@@ -38,8 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         header("Location: ./cliente/visualizzaCliente.php");
                         break;
                     case "operatore":
-                        header("Location: backend/operatore.php");
-                        break;
                     case "admin":
                         header("Location: backend/sceltaAdmin.php");
                         break;
