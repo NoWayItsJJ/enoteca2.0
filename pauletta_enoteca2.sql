@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mar 23, 2024 alle 12:02
--- Versione del server: 10.4.27-MariaDB
--- Versione PHP: 8.2.0
+-- Generation Time: Mar 24, 2024 at 09:51 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `articoli`
+-- Table structure for table `articoli`
 --
 
 CREATE TABLE `articoli` (
@@ -37,18 +37,18 @@ CREATE TABLE `articoli` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `articoli`
+-- Dumping data for table `articoli`
 --
 
 INSERT INTO `articoli` (`id_articolo`, `numero_inventario`, `articolo`, `stato`, `fk_id_categoria`, `fk_id_centro`) VALUES
 (1, '000017243', 'xbox one', 'disponibile', 1, 1),
-(2, '69420', 'ready player one', 'disponibile', 2, 2),
+(2, '69420', 'ready player one', 'in prestito', 2, 2),
 (4, '12345', 'playstation 5', 'guasto', 1, 3),
 (5, '32834', 'harry potter', 'disponibile', 2, 3),
 (9, '071', 'game of thrones', 'in prestito', 2, 3);
 
 --
--- Trigger `articoli`
+-- Triggers `articoli`
 --
 DELIMITER $$
 CREATE TRIGGER `copy_and_delete_trigger` BEFORE DELETE ON `articoli` FOR EACH ROW BEGIN
@@ -62,7 +62,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `articoli_dismessi`
+-- Table structure for table `articoli_dismessi`
 --
 
 CREATE TABLE `articoli_dismessi` (
@@ -75,7 +75,7 @@ CREATE TABLE `articoli_dismessi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `articoli_dismessi`
+-- Dumping data for table `articoli_dismessi`
 --
 
 INSERT INTO `articoli_dismessi` (`id_articolo2`, `numero_inventario`, `articolo`, `stato`, `fk_id_categoria`, `fk_id_centro`) VALUES
@@ -83,7 +83,7 @@ INSERT INTO `articoli_dismessi` (`id_articolo2`, `numero_inventario`, `articolo`
 (11, '123456', 'test restore', 'guasto', 1, 2);
 
 --
--- Trigger `articoli_dismessi`
+-- Triggers `articoli_dismessi`
 --
 DELIMITER $$
 CREATE TRIGGER `restore_trigger` BEFORE DELETE ON `articoli_dismessi` FOR EACH ROW BEGIN
@@ -97,7 +97,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `categorie`
+-- Table structure for table `categorie`
 --
 
 CREATE TABLE `categorie` (
@@ -107,7 +107,7 @@ CREATE TABLE `categorie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `categorie`
+-- Dumping data for table `categorie`
 --
 
 INSERT INTO `categorie` (`id_categoria`, `categoria`, `tipologia`) VALUES
@@ -117,7 +117,7 @@ INSERT INTO `categorie` (`id_categoria`, `categoria`, `tipologia`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `centri`
+-- Table structure for table `centri`
 --
 
 CREATE TABLE `centri` (
@@ -128,7 +128,7 @@ CREATE TABLE `centri` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `centri`
+-- Dumping data for table `centri`
 --
 
 INSERT INTO `centri` (`id_centro`, `nome`, `citta`, `indirizzo`) VALUES
@@ -139,7 +139,7 @@ INSERT INTO `centri` (`id_centro`, `nome`, `citta`, `indirizzo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `prenotazioni`
+-- Table structure for table `prenotazioni`
 --
 
 CREATE TABLE `prenotazioni` (
@@ -152,7 +152,7 @@ CREATE TABLE `prenotazioni` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `prestiti`
+-- Table structure for table `prestiti`
 --
 
 CREATE TABLE `prestiti` (
@@ -164,15 +164,18 @@ CREATE TABLE `prestiti` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `prestiti`
+-- Dumping data for table `prestiti`
 --
 
 INSERT INTO `prestiti` (`id_prestito`, `data_inizio`, `data_fine`, `fk_id_utente`, `fk_id_articolo`) VALUES
 (1, '2024-01-14', '2024-01-28', 2, 1),
-(3, '2024-03-25', '2024-03-25', 2, 11);
+(3, '2024-03-25', '2024-03-25', 2, 11),
+(4, '2024-03-25', '2024-04-05', 6, 9),
+(5, '2024-03-18', '2024-03-18', 5, 2),
+(10, '2024-03-26', NULL, 2, 2);
 
 --
--- Trigger `prestiti`
+-- Triggers `prestiti`
 --
 DELIMITER $$
 CREATE TRIGGER `check_dates` BEFORE UPDATE ON `prestiti` FOR EACH ROW BEGIN
@@ -186,7 +189,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `utenti`
+-- Table structure for table `utenti`
 --
 
 CREATE TABLE `utenti` (
@@ -200,21 +203,22 @@ CREATE TABLE `utenti` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `utenti`
+-- Dumping data for table `utenti`
 --
 
 INSERT INTO `utenti` (`id_utente`, `nome`, `cognome`, `indirizzo`, `email`, `password`, `tipo_utente`) VALUES
 (1, 'fabio', 'pauletta', 'via interna 7, pordenone', '1@gmail.com', '6e6bc4e49dd477ebc98ef4046c067b5f', 'admin'),
 (2, 'federica', 'casiraghi', 'via interna 7, pordenone', '2@gmail.com', '6e6bc4e49dd477ebc98ef4046c067b5f', 'cliente'),
 (5, 'kevin', 'cesco', 'via roma 77, pramaggiore', '3@gmail.com', '6e6bc4e49dd477ebc98ef4046c067b5f', 'cliente'),
-(6, 'riccardo', 'saro', 'via amalteo, nave', '4@gmail.com', '6e6bc4e49dd477ebc98ef4046c067b5f', 'cliente');
+(6, 'riccardo', 'saro', 'via amalteo, nave', '4@gmail.com', '6e6bc4e49dd477ebc98ef4046c067b5f', 'cliente'),
+(7, 'pippo', 'pluto', 'via dalle palle 4', '6@gmail.com', '6e6bc4e49dd477ebc98ef4046c067b5f', 'operatore');
 
 --
--- Indici per le tabelle scaricate
+-- Indexes for dumped tables
 --
 
 --
--- Indici per le tabelle `articoli`
+-- Indexes for table `articoli`
 --
 ALTER TABLE `articoli`
   ADD PRIMARY KEY (`id_articolo`),
@@ -222,7 +226,7 @@ ALTER TABLE `articoli`
   ADD KEY `fk_id_categoria` (`fk_id_categoria`);
 
 --
--- Indici per le tabelle `articoli_dismessi`
+-- Indexes for table `articoli_dismessi`
 --
 ALTER TABLE `articoli_dismessi`
   ADD PRIMARY KEY (`id_articolo2`),
@@ -230,19 +234,19 @@ ALTER TABLE `articoli_dismessi`
   ADD KEY `fk_id_categoria` (`fk_id_categoria`);
 
 --
--- Indici per le tabelle `categorie`
+-- Indexes for table `categorie`
 --
 ALTER TABLE `categorie`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
--- Indici per le tabelle `centri`
+-- Indexes for table `centri`
 --
 ALTER TABLE `centri`
   ADD PRIMARY KEY (`id_centro`);
 
 --
--- Indici per le tabelle `prenotazioni`
+-- Indexes for table `prenotazioni`
 --
 ALTER TABLE `prenotazioni`
   ADD PRIMARY KEY (`id_prenotazione`),
@@ -250,7 +254,7 @@ ALTER TABLE `prenotazioni`
   ADD KEY `fk_id_articolo` (`fk_id_articolo`);
 
 --
--- Indici per le tabelle `prestiti`
+-- Indexes for table `prestiti`
 --
 ALTER TABLE `prestiti`
   ADD PRIMARY KEY (`id_prestito`),
@@ -258,84 +262,84 @@ ALTER TABLE `prestiti`
   ADD KEY `fk_id_articolo` (`fk_id_articolo`);
 
 --
--- Indici per le tabelle `utenti`
+-- Indexes for table `utenti`
 --
 ALTER TABLE `utenti`
   ADD PRIMARY KEY (`id_utente`);
 
 --
--- AUTO_INCREMENT per le tabelle scaricate
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT per la tabella `articoli`
+-- AUTO_INCREMENT for table `articoli`
 --
 ALTER TABLE `articoli`
   MODIFY `id_articolo` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT per la tabella `articoli_dismessi`
+-- AUTO_INCREMENT for table `articoli_dismessi`
 --
 ALTER TABLE `articoli_dismessi`
   MODIFY `id_articolo2` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT per la tabella `categorie`
+-- AUTO_INCREMENT for table `categorie`
 --
 ALTER TABLE `categorie`
   MODIFY `id_categoria` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT per la tabella `centri`
+-- AUTO_INCREMENT for table `centri`
 --
 ALTER TABLE `centri`
   MODIFY `id_centro` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT per la tabella `prenotazioni`
+-- AUTO_INCREMENT for table `prenotazioni`
 --
 ALTER TABLE `prenotazioni`
-  MODIFY `id_prenotazione` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id_prenotazione` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
--- AUTO_INCREMENT per la tabella `prestiti`
+-- AUTO_INCREMENT for table `prestiti`
 --
 ALTER TABLE `prestiti`
-  MODIFY `id_prestito` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_prestito` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT per la tabella `utenti`
+-- AUTO_INCREMENT for table `utenti`
 --
 ALTER TABLE `utenti`
-  MODIFY `id_utente` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_utente` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- Limiti per le tabelle scaricate
+-- Constraints for dumped tables
 --
 
 --
--- Limiti per la tabella `articoli`
+-- Constraints for table `articoli`
 --
 ALTER TABLE `articoli`
   ADD CONSTRAINT `articoli_ibfk_1` FOREIGN KEY (`fk_id_centro`) REFERENCES `centri` (`id_centro`) ON UPDATE CASCADE,
   ADD CONSTRAINT `articoli_ibfk_2` FOREIGN KEY (`fk_id_categoria`) REFERENCES `categorie` (`id_categoria`) ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `articoli_dismessi`
+-- Constraints for table `articoli_dismessi`
 --
 ALTER TABLE `articoli_dismessi`
   ADD CONSTRAINT `articoli_dismessi_ibfk_1` FOREIGN KEY (`fk_id_categoria`) REFERENCES `categorie` (`id_categoria`) ON UPDATE CASCADE,
   ADD CONSTRAINT `articoli_dismessi_ibfk_2` FOREIGN KEY (`fk_id_centro`) REFERENCES `centri` (`id_centro`) ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `prenotazioni`
+-- Constraints for table `prenotazioni`
 --
 ALTER TABLE `prenotazioni`
   ADD CONSTRAINT `prenotazioni_ibfk_1` FOREIGN KEY (`fk_id_utente`) REFERENCES `utenti` (`id_utente`) ON UPDATE CASCADE,
   ADD CONSTRAINT `prenotazioni_ibfk_2` FOREIGN KEY (`fk_id_articolo`) REFERENCES `articoli` (`id_articolo`) ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `prestiti`
+-- Constraints for table `prestiti`
 --
 ALTER TABLE `prestiti`
   ADD CONSTRAINT `prestiti_ibfk_1` FOREIGN KEY (`fk_id_utente`) REFERENCES `utenti` (`id_utente`) ON UPDATE CASCADE;
