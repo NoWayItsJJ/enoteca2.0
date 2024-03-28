@@ -229,6 +229,10 @@ form input[type="checkbox"] + label {
 	width: 150px;
 }
 
+.colonnaPassword {
+	width: 350px;
+}
+
 /* Stili per i pulsanti nella tabella */
 button.btn {
 	padding: 5px 10px;
