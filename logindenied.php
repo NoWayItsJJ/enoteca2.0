@@ -69,7 +69,7 @@
         <div class="login-box">
             <i class="fas fa-exclamation-triangle danger-icon"></i> <!-- Icona di pericolo -->
             <h2>Login non autorizzato</h2>
-            <input type="button" name="login" value="Pagina di login" onclick="location.href='index.php'">
+            <input type="button" name="login" value="Pagina di login" onclick="location.href='logout.php'">
         </div>
     </div>
 </body>
