@@ -34,15 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $insertStmt = $conn->prepare("INSERT INTO utenti (nome, cognome, indirizzo, email, password, tipo_utente) VALUES (?, ?, ?, ?, ?, ?)");
             $insertStmt->bind_param("ssssss", $nome, $cognome, $indirizzo, $email, $passmd5, $tipo);
             $insertStmt->execute();
-            session_start();
-            $_SESSION['email'] = $email;
-            $_SESSION['password'] = $passmd5;
-            $result = $conn->query($getSql);
-            while($row = $result->fetch_assoc())
-            {
-                $_SESSION['id_utente'] = $row["id_utente"];
-                $_SESSION['tipo_utente'] = $row["tipo_utente"];
-            }
             header("Location: visualizzaUtenti.php");
         }
     } else {
